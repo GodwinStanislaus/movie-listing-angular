@@ -1,0 +1,24 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+        <label> Rating : {{ratingValue}} &nbsp;&nbsp;</label>
+        <mv-slider name="rating" [min]="min" [max]="max" [step]="0.5" ([value])="ratingValue"
+            (change)="filterMoviesByRating($event)"></mv-slider>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-6 col-sm-3">
+            <div class="input-group input-group-sm" *ngIf="genres  && genres.size > 0">
+                <p *ngFor="let genre of genres | keyvalue">
+                    <input type="checkbox" id={{genre.key}} value={{genre.key}}
+                        (change)="filteMoviesByGenre(genre, $event.target)" />
+                    <label class="checkbox-inline" for={{genre.key}}>{{genre.value}}</label>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 col-sm-6 d-flex align-items-stretch" *ngFor="let movie of filteredMovies">
+            <app-movie-card [movie]="movie"> </app-movie-card>
+        </div>
+
+    </div>
+</div>
